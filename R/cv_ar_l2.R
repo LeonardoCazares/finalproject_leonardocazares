@@ -14,7 +14,7 @@
 #' }
 #' @export
 #'
-#' @example
+#' @examples
 #' output <- cv_ar_l2(1:365, folds = 12, lags = 7, beta = 0.1)
 #' print(output$fold_mae)
 #' print(output$mean_mae)

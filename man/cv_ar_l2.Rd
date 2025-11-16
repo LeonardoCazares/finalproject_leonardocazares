@@ -2,7 +2,7 @@
 % Please edit documentation in R/cv_ar_l2.R
 \name{cv_ar_l2}
 \alias{cv_ar_l2}
-\title{Cross-validation para modelo AR con L2}
+\title{Cross-validation for a L2 autoregression model}
 \usage{
 cv_ar_l2(x, folds = 5, lags = 7, beta = 0.1)
 }
@@ -25,5 +25,5 @@ List with,
 }
 }
 \description{
-Cross-validation para modelo AR con L2
+Cross-validation for a L2 autoregression model
 }
