@@ -60,22 +60,22 @@ cv_ar_l2 <- function(x, folds = 5, lags = 7, beta = 0.1) {
 
     y_val <- val[(lags + 1L):n_val] # Define labels
 
-  #  # Add the interception term
-  #  Z_val <- cbind(Intercept = 1, X_val)
-#
-  #  # With the training beta produce predictions
-  #  y_hat_val <- as.vector(Z_val %*% fit$coef)
-#
-  #  # MAE for the respective validation fold
-  #  fold_mae[i] <- mean(abs(y_val - y_hat_val))
-  #}
-#
-  #mean_mae <- mean(fold_mae, na.rm = TRUE) # Mean MAE across validation folds
-#
-  #list(
-  #  fold_mae = fold_mae,
-  #  mean_mae = mean_mae,
-  #  lags     = lags,
-  #  beta     = beta
-  #)
+    # Add the interception term
+    Z_val <- cbind(Intercept = 1, X_val)
+
+    # With the training beta produce predictions
+    y_hat_val <- as.vector(Z_val %*% fit$coef)
+
+    # MAE for the respective validation fold
+    fold_mae[i] <- mean(abs(y_val - y_hat_val))
+  }
+
+  mean_mae <- mean(fold_mae, na.rm = TRUE) # Mean MAE across validation folds
+
+  list(
+    fold_mae = fold_mae,
+    mean_mae = mean_mae,
+    lags     = lags,
+    beta     = beta
+  )
 }
