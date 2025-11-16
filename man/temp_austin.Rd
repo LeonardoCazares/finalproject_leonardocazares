@@ -7,7 +7,7 @@
 \format{
 A data frame with 3557 rows and the daily temperature measurement for Austin (on average humidity conditions):
 \describe{
-\item{datetime}{Date YYYY-MM-DD}
+\item{dates}{Date YYYY-MM-DD}
 \item{temp}{numeric, Temperature on average humidity conditions (°F)}
 }
 }
