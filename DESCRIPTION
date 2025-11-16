@@ -1,0 +1,10 @@
+Package: finalproject_leonardocazares
+Title: Dynamic Linear Autogression for Cross-validated Time Series Prediction
+Version: 0.0.0.9000
+Authors@R: 
+    person("Leonardo Damián", "Cázares Trejo", , "leonardocazares@tamu.edu", role = c("aut", "cre"))
+Description: This package implements a linear autoregressive model with L₂ regularization for univariate time-series prediction tasks, where the lag-order is determined using cross-validation strategies.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
