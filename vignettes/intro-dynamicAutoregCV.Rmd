@@ -31,3 +31,26 @@ str(temp_austin)
 head(temp_austin)
 ```
 
+From the above code we will only keep the univariate time-series of interest and the dates. 
+
+```{r plot data}
+temps <- temp_austin$temp
+temp_austin$date <- as.Date(temp_austin$date) # Keep dates as Date data-type
+dates <- temp_austin$date
+
+summary(temps)
+```
+
+Showing the available data in the next plot.
+
+```{r plot-time-series, fig.height=4, fig.width=7}
+ggplot(temp_austin, aes(x = date, y = temp)) +
+  geom_line() +
+  labs(
+    title = "Daily temperature in Austin",
+    x = "Date",
+    y = "Temperature (°F)"
+  ) +
+  theme_minimal()
+```
+
