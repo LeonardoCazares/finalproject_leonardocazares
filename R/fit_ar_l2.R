@@ -40,39 +40,39 @@ fit_ar_l2 <- function(x, lags, beta) {
   n_rows <- n - lags
 
   # Design matrix, where each row is: (x_t, x_{t+1}, ..., x_{t+lags-1})
-  #X <- matrix(NA_real_, nrow = n_rows, ncol = lags)
-  #for (i in seq_len(n_rows)) {
-  #  X[i, ] <- x[i:(i + lags - 1L)]
-  #}
-#
-  ## Prediction vector: y_t = x_{t+lags}
-  #y <- x[(lags + 1L):n]
-#
-  ## Add intercept.
-  #Z <- cbind(Intercept = 1, X)
-  #p <- ncol(Z)
-#
-  ## Penalization matrix
-  #penalty <- diag(c(0, rep(beta, p - 1L)))
-#
-  ## Closed rigde-regression solution: (Z'Z + penalty)^(-1) Z'y
-  #XtX <- crossprod(Z)        # t(Z) %*% Z
-  #Xty <- crossprod(Z, y)     # t(Z) %*% y
-  #coef <- solve(XtX + penalty, Xty)
-#
-  ## Training predictions
-  #y_pred <- as.vector(Z %*% coef)
-#
-  ## MAE for training
-  #mae <- mean(abs(y - y_pred))
-#
-  #list(
-  #  coef   = coef,
-  #  lags   = lags,
-  #  beta   = beta,
-  #  mae    = mae,
-  #  X      = X,
-  #  y      = y,
-  #  y_pred = y_pred
-  #)
+  X <- matrix(NA_real_, nrow = n_rows, ncol = lags)
+  for (i in seq_len(n_rows)) {
+    X[i, ] <- x[i:(i + lags - 1L)]
+  }
+
+  # Prediction vector: y_t = x_{t+lags}
+  y <- x[(lags + 1L):n]
+
+  # Add intercept.
+  Z <- cbind(Intercept = 1, X)
+  p <- ncol(Z)
+
+  # Penalization matrix
+  penalty <- diag(c(0, rep(beta, p - 1L)))
+
+  # Closed rigde-regression solution: (Z'Z + penalty)^(-1) Z'y
+  XtX <- crossprod(Z)        # t(Z) %*% Z
+  Xty <- crossprod(Z, y)     # t(Z) %*% y
+  coef <- solve(XtX + penalty, Xty)
+
+  # Training predictions
+  y_pred <- as.vector(Z %*% coef)
+
+  # MAE for training
+  mae <- mean(abs(y - y_pred))
+
+  list(
+    coef   = coef,
+    lags   = lags,
+    beta   = beta,
+    mae    = mae,
+    X      = X,
+    y      = y,
+    y_pred = y_pred
+  )
 }
