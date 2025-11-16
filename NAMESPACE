@@ -3,3 +3,4 @@
 export(cv_ar_l2)
 export(cv_dataset_creation)
 export(fit_ar_l2)
+export(train_test_split)
