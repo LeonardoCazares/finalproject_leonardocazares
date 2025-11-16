@@ -1,4 +1,4 @@
-#' Cross-validation para modelo AR con L2
+#' Cross-validation for a L2 autoregression model
 #'
 #' @param x vector, time series to be used for cross validation
 #' @param folds integer, number of folds considered for CV
