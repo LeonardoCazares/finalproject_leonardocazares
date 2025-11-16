@@ -1,4 +1,4 @@
-Package: finalproject_leonardocazares
+Package: dynamic_autoreg_cv
 Title: Dynamic Linear Autogression for Cross-validated Time Series Prediction
 Version: 0.0.0.9000
 Authors@R: 
