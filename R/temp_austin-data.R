@@ -5,7 +5,7 @@
 #' @format A data frame with 3557 rows and the daily temperature measurement for Austin (on average humidity conditions):
 #' \describe{
 #'   \item{datetime}{Date YYYY-MM-DD}
-#'   \item{temo}{numeric, Temperature on average humidity conditions (°F)}
+#'   \item{temp}{numeric, Temperature on average humidity conditions (°F)}
 #' }
 #' @source \url{https://www.ncei.noaa.gov/} (NCEI / NOAA Climate Data Online)
 "temp_austin"
