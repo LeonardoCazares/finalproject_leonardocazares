@@ -46,4 +46,14 @@ train_test_split <- function(x, dates, p = 0.05) {
   x_train <- x[1:n_train]
   x_test <- x[(n_train + 1L):n]
 
+  # Dates spliting
+  dates_train <- dates[1:n_train]
+  dates_test <- dates[(n_train + 1L):n]
+
+  list(
+    x_train = x_train,
+    x_test = x_test,
+    dates_train = dates_train,
+    dates_test = dates_test
+  )
 }
