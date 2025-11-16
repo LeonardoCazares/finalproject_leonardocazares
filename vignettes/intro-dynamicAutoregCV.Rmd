@@ -21,4 +21,13 @@ library(dynamicAutoregCV)
 library(ggplot2)
 ```
 
+As a use case, we work with a dataset of average daily temperature in Austin, TX. These data were extracted from the National Centers for Environmental Information (NCEI) [website](https://www.ncei.noaa.gov). 
+
+The dataset covers the period from 2016-01-01 to 2025-08-25, with measurements in °F. As part of the data preprocessing, all NaN values were replaced with the last valid temperature measurement so that the autoregressive model is not biased by future (out-of-sample) measurements.
+
+```{r load-data}
+data("temp_austin")
+str(temp_austin)
+head(temp_austin)
+```
 
