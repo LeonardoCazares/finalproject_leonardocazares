@@ -44,22 +44,22 @@ cv_ar_l2 <- function(x, folds = 5, lags = 7, beta = 0.1) {
     # Get the respective validation batch of data
     val <- fold_i$val
 
-  #  # Check that the lenght of the validation dataset is greater than the number of lags
-  #  if (length(val) <= lags) {
-  #    fold_mae[i] <- NA_real_ # If not tha MAE is a NaN value
-  #    next
-  #  }
-#
-  #  n_val   <- length(val)
-  #  n_rows  <- n_val - lags # Number of batches for validation
-  #  X_val   <- matrix(NA_real_, nrow = n_rows, ncol = lags) # Design matrix for validation
-#
-  #  for (j in seq_len(n_rows)) {
-  #    X_val[j, ] <- val[j:(j + lags - 1L)] # Create lags
-  #  }
-#
-  #  y_val <- val[(lags + 1L):n_val] # Define labels
-#
+    # Check that the lenght of the validation dataset is greater than the number of lags
+    if (length(val) <= lags) {
+      fold_mae[i] <- NA_real_ # If not tha MAE is a NaN value
+      next
+    }
+
+    n_val   <- length(val)
+    n_rows  <- n_val - lags # Number of batches for validation
+    X_val   <- matrix(NA_real_, nrow = n_rows, ncol = lags) # Design matrix for validation
+
+    for (j in seq_len(n_rows)) {
+      X_val[j, ] <- val[j:(j + lags - 1L)] # Create lags
+    }
+
+    y_val <- val[(lags + 1L):n_val] # Define labels
+
   #  # Add the interception term
   #  Z_val <- cbind(Intercept = 1, X_val)
 #
