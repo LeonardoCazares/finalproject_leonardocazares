@@ -37,5 +37,13 @@ train_test_split <- function(x, dates, p = 0.05) {
     stop("`dates` must have the same length as `x`.")
   }
 
+  # number of points for testing
+  n_test  <- max(1L, floor(n * p))
+  # number of points for training
+  n_train <- n - n_test
+
+  # Time series spliting
+  x_train <- x[1:n_train]
+  x_test <- x[(n_train + 1L):n]
 
 }
