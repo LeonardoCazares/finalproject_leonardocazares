@@ -29,21 +29,21 @@ cv_ar_l2 <- function(x, folds = 5, lags = 7, beta = 0.1) {
   fold_mae <- numeric(length(cv_list))
   names(fold_mae) <- names(cv_list)
 
-  ## For each of the training-validation pairs for each CV case
-  #for (i in seq_along(cv_list)) {
-#
-  #  # Get i-th fold for CV
-  #  fold_i <- cv_list[[i]]
-#
-  #  # Concatenate the two bunch of training data
-  #  train_series <- c(fold_i$train_batch_1, fold_i$train_batch_2)
-#
-  #  # Train the i-th CV model on the splited training data
-  #  fit <- fit_ar_l2(train_series, lags = lags, beta = beta)
-#
-  #  # Get the respective validation batch of data
-  #  val <- fold_i$val
-#
+  # For each of the training-validation pairs for each CV case
+  for (i in seq_along(cv_list)) {
+
+    # Get i-th fold for CV
+    fold_i <- cv_list[[i]]
+
+    # Concatenate the two bunch of training data
+    train_series <- c(fold_i$train_batch_1, fold_i$train_batch_2)
+
+    # Train the i-th CV model on the splited training data
+    fit <- fit_ar_l2(train_series, lags = lags, beta = beta)
+
+    # Get the respective validation batch of data
+    val <- fold_i$val
+
   #  # Check that the lenght of the validation dataset is greater than the number of lags
   #  if (length(val) <= lags) {
   #    fold_mae[i] <- NA_real_ # If not tha MAE is a NaN value
