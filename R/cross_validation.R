@@ -9,8 +9,11 @@
 #' @examples
 #' result <- cv_dataset_creation(1:25, 5)
 #' print(result$train_batch_1)
-#' print(result$val)
-#' print(result$train_batch_2)
+#' print(result$fold_1)
+#' print(result$fold_2)
+#' print(result$fold_3)
+#' print(result$fold_4)
+#' print(result$fold_5)
 cv_dataset_creation <- function(x, folds = 5) {
   n <- length(x)
   n_per_fold <- n %/% folds  # Size of each fold
