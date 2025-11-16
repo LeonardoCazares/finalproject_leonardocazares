@@ -1,8 +1,8 @@
 ---
-title: "intro-dynamicAutoregCV"
+title: "Introduction to dynamicAutoregCV"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{intro-dynamicAutoregCV}
+  %\VignetteIndexEntry{Introduction to dynamicAutoregCV}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,6 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+Firstly, all the necessary libraries, for the autoregression model and plots are imported.
+
 ```{r setup}
 library(dynamicAutoregCV)
+library(ggplot2)
 ```
+
+
