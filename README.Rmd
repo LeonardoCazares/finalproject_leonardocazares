@@ -23,6 +23,8 @@ The goal of dynamicAutoregCV is to create a linear ridge autoregression algorith
 - A cross-validation scheme that allows us to find the best regularization parameter and number of lags for the validation set.
 - Dynamic forecasting for the test set, moving the training window each time a new value is incorporated.
 
+![Cross-validation for time series.](man/figures/rep_comp_project.jpeg)
+
 ## Installation
 
 You can install the development version of dynamicAutoregCV from [GitHub](https://github.com/) with:

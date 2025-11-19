@@ -16,6 +16,13 @@ features of the package include:
 - Dynamic forecasting for the test set, moving the training window each
   time a new value is incorporated.
 
+<figure>
+<img src="man/figures/rep_comp_project.jpeg"
+alt="Cross-validation for time series." />
+<figcaption aria-hidden="true">Cross-validation for time
+series.</figcaption>
+</figure>
+
 ## Installation
 
 You can install the development version of dynamicAutoregCV from
