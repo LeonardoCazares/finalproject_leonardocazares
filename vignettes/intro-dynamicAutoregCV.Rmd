@@ -54,3 +54,28 @@ ggplot(temp_austin, aes(x = date, y = temp)) +
   theme_minimal()
 ```
 
+As we can see there is a gap in the data corresponding to the 2020 year, the temperature measurements from that year where removed because most of the half of the where not available (NaNs values).
+
+```{r split data}
+train_test_data <- train_test_split(temps, dates, p = 0.05)
+print(paste('The total lenght of the time-serie is:', length(temps)))
+print(paste('The number of points for cross-validation (and initial training) are:', length(train_test_data$x_train)))
+print(paste('The number of points for testing (and dynamic training) are:',length(train_test_data$x_test)))
+print(paste('Initial date for training', train_test_data$dates_train[1], '. Final date for training', train_test_data$dates_train[length(train_test_data$dates_train)]))
+print(paste('Initial date for testing', train_test_data$dates_test[1], '. Final date for testing', train_test_data$dates_test[length(train_test_data$dates_test)]))
+```
+
+With 
+
+```{r cross-validation}
+betas <- c(0.0001, 0.001, 0.01, 0.1, 0.25, 0.5, 0.75, 1, 2.5, 5, 10, 20, 50)
+mean_mae_betas <- numeric(length = length(betas))
+names(mean_mae_betas) <- paste0('beta_',betas)
+
+for (beta_i in betas){
+  cv_beta_i <- cv_ar_l2(train_test_data$x_train, folds = 8, lags = 7, beta = beta_i)
+  mean_mae_betas[paste('beta_', beta_i)] = cv_beta_i$mean_mae
+}
+
+print(mean_mae_betas)
+```

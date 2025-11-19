@@ -7,12 +7,11 @@
 train_test_split(x, dates, p = 0.05)
 }
 \arguments{
-\item{x}{vector, the total univariate time series to be considered.}
+\item{x}{vector, the total univariate time series to be considered}
 
-\item{dates}{vector, the respective dates for x (same length as x).}
+\item{dates}{vector, the respective dates for x (same length as x)}
 
-\item{p}{numeric, percentage of the time series used for testing,
-default = 0.05 (5\\%).}
+\item{p}{numeric, percentage of the time series used for testing,}
 }
 \value{
 List with:

@@ -1,11 +1,10 @@
 #' Split function to obtain train and test datasets.
 #'
-#' @param x vector, the total univariate time series to be considered.
-#' @param dates vector, the respective dates for x (same length as x).
+#' @param x vector, the total univariate time series to be considered
+#' @param dates vector, the respective dates for x (same length as x)
 #' @param p numeric, percentage of the time series used for testing,
-#'   default = 0.05 (5\%).
 #'
-#' @return List with:
+#' @returns List with:
 #' \itemize{
 #'   \item x_train: vector, training set
 #'   \item x_test: vector, testing set
