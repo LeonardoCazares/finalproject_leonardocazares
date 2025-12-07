@@ -65,13 +65,11 @@ print(paste('Initial date for training', train_test_data$dates_train[1], '. Fina
 print(paste('Initial date for testing', train_test_data$dates_test[1], '. Final date for testing', train_test_data$dates_test[length(train_test_data$dates_test)]))
 ```
 
-Now, the first part of the package can be completed: the cross-validation procedure. For this task, we define two grids, one for the beta values and the other for the number of lags, over which we perform the blocked cross-validation scheme ([Schnaubelt M., 2019](https://www.econstor.eu/bitstream/10419/209136/1/1684440068.pdf)) across all possible combinations of the hyperparameters, selecting the one that minimizes the out-of-sample prediction error.
+First and foremost, we can complete the cross-validation procedure. For this task, we define two grids, one for the beta values and the other for the number of lags, over which we perform the blocked cross-validation scheme ([Schnaubelt M., 2019](https://www.econstor.eu/bitstream/10419/209136/1/1684440068.pdf)) across all possible combinations of the hyperparameters, selecting the one that minimizes the out-of-sample prediction error.
 
 ```{r cross-validation}
-# Grid for betas
 betas <- c(0.0001, 0.001, 0.01, 0.1, 0.25, 0.5, 0.75, 1, 2.5, 5, 10, 20, 50)
 
-# Grid for lags
 lags <- c(3,7,14,21,30)
 
 beta_min <- NULL
@@ -81,7 +79,7 @@ mean_mae_min <- Inf
 for (lag_i in lags){
   for (beta_i in betas){
     cv_beta_i <- cv_ar_l2(train_test_data$x_train, folds = 8, 
-                          lags = lag_i, beta = beta_i)
+                          lags = lag_i, beta = beta_i)$mean_mae
     if (cv_beta_i < mean_mae_min){
       mean_mae_min <- cv_beta_i
       beta_min <- beta_i
@@ -90,5 +88,13 @@ for (lag_i in lags){
   }
 }
 
-print(paste('The lowest mean out-of-sample prediction error was achived while, beta = ',beta_min,'and lags = ',lag_min))
+cat(
+  "The lowest mean out-of-sample prediction error was achieved while,\n",
+  "beta = ", beta_min, "\n",
+  "lags = ", lag_min, "\n",
+  sep = ""
+)
+
 ```
+
+At this point we have the optimized regularization parameter and the number of lags, from this point forward we create the predictions with dinamic training
