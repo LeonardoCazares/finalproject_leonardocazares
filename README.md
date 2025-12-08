@@ -51,6 +51,12 @@ The function created for the project covers:
 Splits a univariate time series into training and testing sets based on
 a percentage cutoff.
 
+    train_test_data <- train_test_split(x, dates, p = 0.05)
+    train_test_data$x_train = x_train,
+    train_test_data$x_test
+    train_test_data$dates_train,
+    train_test_data$dates_test
+
 ### `fit_ar_l2()`
 
 Fits an autoregressive model with L2 (ridge) regularization.  
