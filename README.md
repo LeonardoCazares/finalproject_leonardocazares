@@ -12,9 +12,22 @@ algorithm for time-series forecasting with dynamic training. The main
 features of the package include:
 
 - A cross-validation scheme that allows us to find the best
-  regularization parameter and number of lags for the validation set.
-- Dynamic forecasting for the test set, moving the training window each
-  time a new value is incorporated.
+  regularization parameter (for ridge regression) and the number of lags
+  considered for the autogressive settings.
+- Dynamic forecasting for the test set, moving forward the training
+  window training epoch.
+
+To acomplish the two features mentioned above we implemented we prepared
+a dataset of average daily temperature in Austin, TX (extracted from the
+National Centers for Environmental Information (NCEI)). The dataset
+covers the period from 2016-01-01 to 2025-08-25, with measurements in
+°F.
+
+Providing some functions, data spliting into training and testing sets
+
+``` r
+train_test_data <- train_test_split(temps, dates, p = 0.05)
+```
 
 ![Cross-validation for time series.](man/figures/rep_comp_project.jpeg)
 ![Time series out-of-sample forecasting.](man/figures/forecasting.jpg)
