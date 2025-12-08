@@ -98,3 +98,12 @@ cat(
 ```
 
 At this point we have the optimized regularization parameter and the number of lags, from this point forward we create the predictions with dinamic training
+
+```{r dynamic training}
+forecasting <- dynamic_regression(train_test_data$x_train,
+                   train_test_data$x_test,
+                   beta_min, lag_min)
+
+rmse <- mean((as.numeric(forecasting$y_pred) - as.numeric(train_test_data$x_test))**2)
+print(rmse)
+```
