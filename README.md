@@ -17,7 +17,7 @@ features of the package include:
   time a new value is incorporated.
 
 ![Cross-validation for time series.](man/figures/rep_comp_project.jpeg)
-![Time series out-of-sample forecasting.](man/figures/forecasting.pdf)
+![Time series out-of-sample forecasting.](man/figures/forecasting.jpg)
 
 ## Installation
 
