@@ -116,16 +116,14 @@ initial_test_date <- train_test_data$dates_test[1]
 final_test_date <- train_test_data$dates_test[length(train_test_data$dates_test)]
 
 df_plot <- data.frame(
-  date = train_test_data$dates_test,
-  real = train_test_data$x_test,
-  pred = forecasting
+  date   = rep(train_test_data$dates_test, 2),
+  value  = c(train_test_data$x_test, forecasting),
+  serie  = rep(c("Ground-Truth", "Forecasting"), each = length(train_test_data$dates_test))
 )
 
-ggplot(df_plot, aes(x = date)) +
-  geom_line(aes(y = real), color = "black") +   # serie real
-  geom_line(aes(y = pred), color = "red") +     # predicciones
-  labs(title = paste("Temperature forecasting in Austin, ",initial_test_date,'-',final_test_date),
-       x = "Date",
-       y = "Temperature (°F)") +
+ggplot(df_plot, aes(x = date, y = value, color = serie)) +
+  geom_line() +
+  scale_color_manual(values = c("Ground-Truth" = "black", "Forecasting" = "red")) +
+  labs(x = "Date", y = "Temperature (°F)", color = "Time serie:") +
   theme_minimal()
 ```
