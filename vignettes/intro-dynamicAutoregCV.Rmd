@@ -70,7 +70,7 @@ First and foremost, we can complete the cross-validation procedure. For this tas
 ```{r cross-validation}
 betas <- c(0.0001, 0.001, 0.01, 0.1, 0.25, 0.5, 0.75, 1, 2.5, 5, 10, 20, 50)
 
-lags <- c(3,7,14,21,30)
+lags <- c(3,7,14)
 
 beta_min <- NULL
 lag_min <- NULL
@@ -78,7 +78,7 @@ mean_mae_min <- Inf
 
 for (lag_i in lags){
   for (beta_i in betas){
-    cv_beta_i <- cv_ar_l2(train_test_data$x_train, folds = 8, 
+    cv_beta_i <- cv_ar_l2(train_test_data$x_train, folds = 8, # 8
                           lags = lag_i, beta = beta_i)$mean_mae
     if (cv_beta_i < mean_mae_min){
       mean_mae_min <- cv_beta_i
@@ -92,6 +92,7 @@ cat(
   "The lowest mean out-of-sample prediction error was achieved while,\n",
   "beta = ", beta_min, "\n",
   "lags = ", lag_min, "\n",
+  "Min. RMSE = ", mean_mae_min, "\n",
   sep = ""
 )
 
@@ -102,8 +103,8 @@ At this point we have the optimized regularization parameter and the number of l
 ```{r dynamic training}
 forecasting <- dynamic_regression(train_test_data$x_train,
                    train_test_data$x_test,
-                   beta_min, lag_min)
+                   beta_min, lag_min, window = 365)
 
-rmse <- mean((as.numeric(forecasting$y_pred) - as.numeric(train_test_data$x_test))**2)
+rmse <- mean((as.numeric(forecasting) - as.numeric(train_test_data$x_test))**2)
 print(rmse)
 ```

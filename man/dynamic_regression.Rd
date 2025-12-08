@@ -2,36 +2,47 @@
 % Please edit documentation in R/dynamic_regression.R
 \name{dynamic_regression}
 \alias{dynamic_regression}
-\title{Dynamic training/testing}
+\title{Dynamic ridge autoregressive forecasting}
 \usage{
-dynamic_regression(x_train, x_test, beta, lags)
+dynamic_regression(x_train, x_test, beta, p, window)
 }
 \arguments{
-\item{x_train}{training univariate time serie}
+\item{x_train}{numeric vector, training time series.}
 
-\item{x_test}{testing univariate time serie}
+\item{x_test}{numeric vector, test time series (future observed values).}
 
-\item{beta}{optimized regularization param}
+\item{beta}{non–negative scalar, ridge regularization parameter (lambda).}
 
-\item{lags}{optimized number of lags}
+\item{p}{integer, number of lags in the AR(p) model.}
+
+\item{window}{integer, size of the rolling training window at each step.
+Must satisfy \code{window > p} and \code{window <= length(x_train)}.}
 }
 \value{
-\itemize{
-\item y_pred: vector, out-of-sample predictions
-\item lags: integer, number of used lags
-\item beta: float, value of used regularization param
-}
+numeric vector of predictions of length \code{length(x_test)}.
 }
 \description{
-Dynamic training/testing
+This function performs a dynamic training scheme of a ridge-autoregressive model over
+a univariate time-series. At each step it:
+\itemize{
+\item fits an AR(p) model (where p = # of lags) with ridge penalty using only the last \code{window}
+observations from the training part of the current time series,
+\item predicts a one-step-ahead forecast,
+\item updates the training series by dropping its first value and
+appending the next observed value from \code{x_test}, maintaining
+the length of the training batch equal to the \code{window}.
+}
+The number of predictions is equal to \code{length(x_test)}.
+}
+\details{
+The model includes an intercept which is \strong{not} penalized.
 }
 \examples{
-x <- seq(1,2, length.out = 100)
-x_train <- x[1:80]
-x_test <- x[81:100]
-beta <- 1e-5
-lags <- 1
-out <- dynamic_regression(x_train, x_test, beta, lags)
-print(x_test)
-print(out$y_pred)
+set.seed(2025)
+x <- arima.sim(model = list(ar = 0.7), n = 200)
+x_train <- x[1:160]
+x_test  <- x[161:200]
+preds <- dynamic_regression(x_train, x_test,
+                          beta = 1, p = 3, window = 50)
+length(preds)  # should be length(x_test)
 }
