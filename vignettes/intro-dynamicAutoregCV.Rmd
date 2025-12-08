@@ -70,7 +70,7 @@ First and foremost, we can complete the cross-validation procedure. For this tas
 ```{r cross-validation}
 betas <- c(0.0001, 0.001, 0.01, 0.1, 0.25, 0.5, 0.75, 1, 2.5, 5, 10, 20, 50)
 
-lags <- c(3,7,14)
+lags <- c(3,7,14,21,30)
 
 beta_min <- NULL
 lag_min <- NULL
@@ -98,7 +98,7 @@ cat(
 
 ```
 
-At this point we have the optimized regularization parameter and the number of lags, from this point forward we create the predictions with dinamic training
+At this point we have the optimized regularization parameter and the number of lags, from this point forward we create the predictions with dynamic training, evaluating the performance of our model with the RMSE.
 
 ```{r dynamic training}
 forecasting <- dynamic_regression(train_test_data$x_train,
@@ -107,5 +107,25 @@ forecasting <- dynamic_regression(train_test_data$x_train,
 
 rmse_value <- rmse(train_test_data$x_test,
              forecasting)
+
 print(paste('The RMSE = ', rmse_value))
+```
+
+```{r GT vs. Forecasting, fig.height=4, fig.width=7}
+initial_test_date <- train_test_data$dates_test[1]
+final_test_date <- train_test_data$dates_test[length(train_test_data$dates_test)]
+
+df_plot <- data.frame(
+  date = train_test_data$dates_test,
+  real = train_test_data$x_test,
+  pred = forecasting
+)
+
+ggplot(df_plot, aes(x = date)) +
+  geom_line(aes(y = real), color = "black") +   # serie real
+  geom_line(aes(y = pred), color = "red") +     # predicciones
+  labs(title = paste("Temperature forecasting in Austin, ",initial_test_date,'-',final_test_date),
+       x = "Date",
+       y = "Temperature (°F)") +
+  theme_minimal()
 ```
