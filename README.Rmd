@@ -23,7 +23,12 @@ knitr::opts_chunk$set(
 The goal of dynamicAutoregCV is to create a linear ridge autoregression algorithm for time-series forecasting with dynamic training. The main features of the package include:
 
 - A cross-validation scheme that allows us to find the best regularization parameter (for ridge regression) and the number of lags considered for the autogressive settings.
+
+![Cross-validation for time series.](man/figures/rep_comp_project.jpeg)
+
 - Dynamic forecasting for the test set, moving forward the training window training epoch.
+
+![Time series out-of-sample forecasting.](man/figures/forecasting.jpg)
 
 ## Data
 
@@ -53,9 +58,6 @@ Returns rolling predictions, error metrics, and the model sequence.
 ``` r
 train_test_data <- train_test_split(temps, dates, p = 0.05)
 ```
-
-![Cross-validation for time series.](man/figures/rep_comp_project.jpeg)
-![Time series out-of-sample forecasting.](man/figures/forecasting.jpg)
 
 ## Installation
 

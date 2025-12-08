@@ -16,8 +16,23 @@ features of the package include:
 - A cross-validation scheme that allows us to find the best
   regularization parameter (for ridge regression) and the number of lags
   considered for the autogressive settings.
+
+<figure>
+<img src="man/figures/rep_comp_project.jpeg"
+alt="Cross-validation for time series." />
+<figcaption aria-hidden="true">Cross-validation for time
+series.</figcaption>
+</figure>
+
 - Dynamic forecasting for the test set, moving forward the training
   window training epoch.
+
+<figure>
+<img src="man/figures/forecasting.jpg"
+alt="Time series out-of-sample forecasting." />
+<figcaption aria-hidden="true">Time series out-of-sample
+forecasting.</figcaption>
+</figure>
 
 ## Data
 
@@ -62,9 +77,6 @@ Returns rolling predictions, error metrics, and the model sequence.
 ``` r
 train_test_data <- train_test_split(temps, dates, p = 0.05)
 ```
-
-![Cross-validation for time series.](man/figures/rep_comp_project.jpeg)
-![Time series out-of-sample forecasting.](man/figures/forecasting.jpg)
 
 ## Installation
 
