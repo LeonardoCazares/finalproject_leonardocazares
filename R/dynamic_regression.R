@@ -12,7 +12,7 @@
 #' }
 #' The number of predictions is equal to `length(x_test)`.
 #'
-#' The model includes an intercept which is **not** penalized.
+#' The model includes an intercept which is not penalized.
 #'
 #' @param x_train numeric vector, training time series.
 #' @param x_test numeric vector, test time series (future observed values).
