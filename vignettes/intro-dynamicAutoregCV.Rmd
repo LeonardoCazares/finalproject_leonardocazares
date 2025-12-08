@@ -105,6 +105,7 @@ forecasting <- dynamic_regression(train_test_data$x_train,
                    train_test_data$x_test,
                    beta_min, lag_min, window = 365)
 
-rmse <- mean((as.numeric(forecasting) - as.numeric(train_test_data$x_test))**2)
-print(rmse)
+rmse_value <- rmse(train_test_data$x_test,
+             forecasting)
+print(paste('The RMSE = ', rmse_value))
 ```
