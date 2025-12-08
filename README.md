@@ -24,6 +24,7 @@ covers the period from 2016-01-01 to 2025-08-25, with measurements in
 °F.
 
 Providing some functions, data spliting into training and testing sets
+that is
 
 ``` r
 train_test_data <- train_test_split(temps, dates, p = 0.05)
