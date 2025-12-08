@@ -19,8 +19,8 @@ features of the package include:
 
 <figure>
 <img src="man/figures/rep_comp_project.jpeg"
-alt="Cross-validation for time series." />
-<figcaption aria-hidden="true">Cross-validation for time
+alt="Figure 1. Cross-validation for time series." />
+<figcaption aria-hidden="true">Figure 1. Cross-validation for time
 series.</figcaption>
 </figure>
 
@@ -29,8 +29,8 @@ series.</figcaption>
 
 <figure>
 <img src="man/figures/forecasting.jpg"
-alt="Time series out-of-sample forecasting." />
-<figcaption aria-hidden="true">Time series out-of-sample
+alt="Figure 2. Time series out-of-sample forecasting." />
+<figcaption aria-hidden="true">Figure 2. Time series out-of-sample
 forecasting.</figcaption>
 </figure>
 
@@ -49,9 +49,7 @@ The function created for the project covers:
 ### `train_test_split()`
 
 Splits a univariate time series into training and testing sets based on
-a percentage cutoff.  
-Also returns aligned date vectors for convenient plotting and
-evaluation.
+a percentage cutoff.
 
 ### `fit_ar_l2()`
 
@@ -62,8 +60,9 @@ metrics.
 
 ### `cv_ar_l2()`
 
-Performs K-fold cross-validation over a grid of regularization
-parameters and/or lag values.  
+Performs K-fold blocked cross-validation ([Schnaubelt M.,
+2019](https://www.econstor.eu/bitstream/10419/209136/1/1684440068.pdf))
+over a grid of regularization parameters and/or lag values.  
 Returns the mean validation error for each combination and identifies
 the optimal hyperparameters.
 
@@ -74,9 +73,10 @@ At each time step, the model is re-trained using only the most recent
 observations in a sliding window.  
 Returns rolling predictions, error metrics, and the model sequence.
 
-``` r
-train_test_data <- train_test_split(temps, dates, p = 0.05)
-```
+### `rmse()`
+
+Computes the Root Mean Squared Error (RMSE) between the ground-truth
+time serie and the forecasting.
 
 ## Installation
 
@@ -90,12 +90,5 @@ pak::pak("LeonardoCazares/finalproject_leonardocazares")
 
 ## Work to be done…
 
-For the rest of the project the task will be completed:
-
-- Using the functions created, apply the cross-validation algorithm to a
-  grid of values for the regularization parameter in the ridge
-  regression and for the number of lags.
-- Create and apply a function for the dynamic training/prediction step.
-- Complete the remaining vignettes.
 - \[EXTRA\] If possible, apply a conformal prediction algorithm for the
   uncertainty quantification of the time-series forecasts.

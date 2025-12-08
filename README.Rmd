@@ -24,11 +24,11 @@ The goal of dynamicAutoregCV is to create a linear ridge autoregression algorith
 
 - A cross-validation scheme that allows us to find the best regularization parameter (for ridge regression) and the number of lags considered for the autogressive settings.
 
-![Cross-validation for time series.](man/figures/rep_comp_project.jpeg)
+![Figure 1. Cross-validation for time series.](man/figures/rep_comp_project.jpeg)
 
 - Dynamic forecasting for the test set, moving forward the training window training epoch.
 
-![Time series out-of-sample forecasting.](man/figures/forecasting.jpg)
+![Figure 2. Time series out-of-sample forecasting.](man/figures/forecasting.jpg)
 
 ## Data
 
@@ -39,15 +39,14 @@ To acomplish the two features mentioned above we prepared a dataset of average d
 The function created for the project covers:
 
 ### `train_test_split()`
-Splits a univariate time series into training and testing sets based on a percentage cutoff.  
-Also returns aligned date vectors for convenient plotting and evaluation.
+Splits a univariate time series into training and testing sets based on a percentage cutoff.
 
 ### `fit_ar_l2()`
 Fits an autoregressive model with L2 (ridge) regularization.  
 Takes a univariate time series and a set of lags, solves the closed-form ridge estimator, and returns fitted values, coefficients, and error metrics.
 
 ### `cv_ar_l2()`
-Performs K-fold cross-validation over a grid of regularization parameters and/or lag values.  
+Performs K-fold blocked cross-validation  ([Schnaubelt M., 2019](https://www.econstor.eu/bitstream/10419/209136/1/1684440068.pdf)) over a grid of regularization parameters and/or lag values.  
 Returns the mean validation error for each combination and identifies the optimal hyperparameters.
 
 ### `dynamic_regression()`
@@ -55,9 +54,8 @@ Implements dynamic (rolling-window) training and forecasting.
 At each time step, the model is re-trained using only the most recent observations in a sliding window.  
 Returns rolling predictions, error metrics, and the model sequence.
 
-``` r
-train_test_data <- train_test_split(temps, dates, p = 0.05)
-```
+### `rmse()`
+Computes the Root Mean Squared Error (RMSE) between the ground-truth time serie and the forecasting.
 
 ## Installation
 
@@ -70,10 +68,5 @@ pak::pak("LeonardoCazares/finalproject_leonardocazares")
 
 ## Work to be done...
 
-For the rest of the project the task will be completed:
-
-- Using the functions created, apply the cross-validation algorithm to a grid of values for the regularization parameter in the ridge regression and for the number of lags.
-- Create and apply a function for the dynamic training/prediction step.
-- Complete the remaining vignettes.
 - [EXTRA] If possible, apply a conformal prediction algorithm for the uncertainty quantification of the time-series forecasts.
 
