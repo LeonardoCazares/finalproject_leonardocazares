@@ -7,7 +7,7 @@
 #' @return Lista con:
 #' \itemize{
 #'   \item coef: vector, coefficients for
-#'   \item lags: integer, número de lags usados
+#'   \item lags: integer, number of lags
 #'   \item beta: float, regularization param.
 #'   \item mae: float, mean absolute error for training
 #'   \item X: matrix, design matrix
