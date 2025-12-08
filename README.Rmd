@@ -24,6 +24,7 @@ The goal of dynamicAutoregCV is to create a linear ridge autoregression algorith
 - Dynamic forecasting for the test set, moving the training window each time a new value is incorporated.
 
 ![Cross-validation for time series.](man/figures/rep_comp_project.jpeg)
+![Time series out-of-sample forecasting.](man/figures/forecasting.pdf)
 
 ## Installation
 
