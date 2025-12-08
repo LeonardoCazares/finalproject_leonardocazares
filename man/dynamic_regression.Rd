@@ -35,7 +35,7 @@ the length of the training batch equal to the \code{window}.
 The number of predictions is equal to \code{length(x_test)}.
 }
 \details{
-The model includes an intercept which is \strong{not} penalized.
+The model includes an intercept which is not penalized.
 }
 \examples{
 set.seed(2025)
