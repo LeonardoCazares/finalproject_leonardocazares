@@ -111,7 +111,7 @@ rmse_value <- rmse(train_test_data$x_test,
 print(paste('The RMSE = ', rmse_value))
 ```
 
-Below we can appreciate the behavior of the ground-truth prediction and the predictions given by the dynamic autoregressive model with ridge regularization.
+Below we can appreciate the behavior of the ground-truth and the forecasting given by the dynamic autoregressive model with ridge regularization.
 
 ```{r GT vs. Forecasting, fig.height=4, fig.width=7}
 initial_test_date <- train_test_data$dates_test[1]
