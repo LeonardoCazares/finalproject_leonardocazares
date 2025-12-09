@@ -145,6 +145,18 @@ You can install the development version of dynamicAutoregCV from
 pak::pak("LeonardoCazares/finalproject_leonardocazares")
 ```
 
+## References
+
+- S. Yang, M. Santillana, & S.C. Kou, Accurate estimation of influenza
+  epidemics using Google search data via ARGO, Proc. Natl. Acad. Sci.
+  U.S.A. 112 (47) 14473-14478, <https://doi.org/10.1073/pnas.1515373112>
+  (2015).
+- Schnaubelt, M. (2019). A comparison of machine learning model
+  validation schemes for non-stationary time series data (FAU Discussion
+  Papers in Economics, No. 11/2019). Friedrich-Alexander University
+  Erlangen–Nuremberg, Institute for Economics.
+  <https://hdl.handle.net/10419/209136>.
+
 ## Work to be done…
 
 - \[EXTRA\] If possible, apply a conformal prediction algorithm for the
