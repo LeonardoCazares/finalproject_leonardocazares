@@ -126,7 +126,7 @@ df_plot <- data.frame(
 ggplot(df_plot, aes(x = date, y = value, color = serie)) +
   geom_line() +
   scale_color_manual(values = c("Ground-Truth" = "black", "Forecasting" = "red")) +
-  labs(title = paste('Ground-Truth vs. Forecasting for Temperature in Austin, TX. ',initial_test_date,' - ',final_test_date),
+  labs(title = paste('Temperature Forecasting in Austin, TX. ',initial_test_date,' - ',final_test_date),
        x = "Date",
        y = "Temperature (°F)",
        color = "Time serie:") +
