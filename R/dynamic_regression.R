@@ -3,7 +3,7 @@
 #' This function performs a dynamic training scheme of a ridge-autoregressive model over
 #' a univariate time-series. At each step it:
 #' \itemize{
-#'   \item fits an AR(p) model (where p = # of lags) with ridge penalty using only the last `window`
+#'   \item fits an AR(lags) model (where lags = # of lags) with ridge penalty using only the last `window`
 #'         observations from the training part of the current time series,
 #'   \item predicts a one-step-ahead forecast,
 #'   \item updates the training series by dropping its first value and
@@ -17,9 +17,9 @@
 #' @param x_train numeric vector, training time series.
 #' @param x_test numeric vector, test time series (future observed values).
 #' @param beta non–negative scalar, ridge regularization parameter (lambda).
-#' @param p integer, number of lags in the AR(p) model.
+#' @param lags integer, number of lags in the AR(lags) model.
 #' @param window integer, size of the rolling training window at each step.
-#'   Must satisfy `window > p` and `window <= length(x_train)`.
+#'   Must satisfy `window > lags` and `window <= length(x_train)`.
 #'
 #' @return numeric vector of predictions of length `length(x_test)`.
 #'
@@ -34,9 +34,9 @@
 #' x_train <- x[1:160]
 #' x_test  <- x[161:200]
 #' preds <- dynamic_regression(x_train, x_test,
-#'                           beta = 1, p = 3, window = 50)
+#'                           beta = 1, lags = 3, window = 50)
 #' length(preds)  # should be length(x_test)
-dynamic_regression <- function(x_train, x_test, beta, p, window) {
+dynamic_regression <- function(x_train, x_test, beta, lags, window) {
 
   # Initial checks for the lenght of x_train, x_test, number of lags and the window
 
@@ -47,7 +47,7 @@ dynamic_regression <- function(x_train, x_test, beta, p, window) {
   n_train <- length(x_train)
   n_test  <- length(x_test)
 
-  if (window <= p) {
+  if (window <= lags) {
     stop("The considered window must be strictly greater than the number of lags.")
   }
 
@@ -72,7 +72,7 @@ dynamic_regression <- function(x_train, x_test, beta, p, window) {
     m <- length(series_window) # Lenght of the current training batch
 
     # Design matrix
-    mat <- embed(series_window, p + 1)
+    mat <- embed(series_window, lags + 1)
     y_train <- mat[, 1] # Label columns
     X_lags  <- mat[, -1, drop = FALSE]  # Columns with lag
 
@@ -88,7 +88,7 @@ dynamic_regression <- function(x_train, x_test, beta, p, window) {
     coef_ridge <- solve(XtX + beta * penalty, Xty)
 
     # Make the out-of-sample prediction
-    new_x_lags <- rev(tail(series_window, p))
+    new_x_lags <- rev(tail(series_window, lags))
     new_x <- c(1, new_x_lags) # Add interception
     preds[i] <- drop(new_x %*% coef_ridge) # Get the scalar o.s. prediction
 

@@ -44,7 +44,8 @@ Centers for Environmental Information
 
 ## Functions
 
-The function created for the project covers:
+Below the functions created for this projects are showed, followed by a
+simple code sample displaying the main functionalities of each function:
 
 ### `train_test_split()`
 
@@ -53,10 +54,21 @@ a percentage cutoff.
 
 ``` r
 train_test_data <- train_test_split(x, dates, p = 0.05)
-train_test_data$x_train
-train_test_data$x_test
-train_test_data$dates_train
-train_test_data$dates_test
+train_test_data$x_train # Training dataset
+train_test_data$x_test # Testing dataset
+train_test_data$dates_train # Training dates
+train_test_data$dates_test # Testing dates
+```
+
+### `cv_dataset_creation()`
+
+Given the training dataset creates the folds for the blocked
+cross-validation squeme ([Schnaubelt M.,
+2019](https://www.econstor.eu/bitstream/10419/209136/1/1684440068.pdf)).
+
+``` r
+cv_datasets <- cv_dataset_creation(train_test_data$x_train, folds = 5)
+result$fold_1 # List containing training and validation datasets for the first CV iteration
 ```
 
 ### `fit_ar_l2()`
@@ -66,6 +78,11 @@ Takes a univariate time series and a set of lags, solves the closed-form
 ridge estimator, and returns fitted values, coefficients, and error
 metrics.
 
+``` r
+fit <- fit_ar_l2(x_train, lags = lags, beta = beta)
+fit$coef # Regression coefficients (penalized by ridge reg.)
+```
+
 ### `cv_ar_l2()`
 
 Performs K-fold blocked cross-validation ([Schnaubelt M.,
@@ -74,12 +91,21 @@ over a grid of regularization parameters and/or lag values.
 Returns the mean validation error for each combination and identifies
 the optimal hyperparameters.
 
+``` r
+cv_results <- cv_ar_l2(x_train, folds = 9, lags = 7, beta = 0.1)
+cv_results$mean_mae # Mean RMSE over all folds in the blocked CV.
+```
+
 ### `dynamic_regression()`
 
 Implements dynamic (rolling-window) training and forecasting.  
 At each time step, the model is re-trained using only the most recent
 observations in a sliding window.  
 Returns rolling predictions, error metrics, and the model sequence.
+
+``` r
+forecasting <- dynamic_regression(x_train, x_test, beta = 0.1, lags = 7, window)
+```
 
 ### `rmse()`
 
