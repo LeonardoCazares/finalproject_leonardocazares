@@ -111,6 +111,8 @@ rmse_value <- rmse(train_test_data$x_test,
 print(paste('The RMSE = ', rmse_value))
 ```
 
+Below we can appreciate the behavior of the ground-truth prediction and the predictions given by the dynamic autoregressive model with ridge regularization.
+
 ```{r GT vs. Forecasting, fig.height=4, fig.width=7}
 initial_test_date <- train_test_data$dates_test[1]
 final_test_date <- train_test_data$dates_test[length(train_test_data$dates_test)]
@@ -124,6 +126,9 @@ df_plot <- data.frame(
 ggplot(df_plot, aes(x = date, y = value, color = serie)) +
   geom_line() +
   scale_color_manual(values = c("Ground-Truth" = "black", "Forecasting" = "red")) +
-  labs(x = "Date", y = "Temperature (°F)", color = "Time serie:") +
+  labs(title = paste('Ground-Truth vs. Forecasting for Temperature in Austin, TX. ',initial_test_date,' - ',final_test_date),
+       x = "Date",
+       y = "Temperature (°F)",
+       color = "Time serie:") +
   theme_minimal()
 ```
