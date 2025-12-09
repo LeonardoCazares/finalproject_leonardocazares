@@ -24,6 +24,10 @@ alt="Figure 1. Cross-validation for time series." />
 series.</figcaption>
 </figure>
 
+<p>
+
+</p>
+
 - Dynamic forecasting for the test set, moving forward the training
   window training epoch.
 
@@ -40,7 +44,7 @@ To acomplish the two features mentioned above we prepared a dataset of
 average daily temperature in Austin, TX (extracted from the National
 Centers for Environmental Information
 [NCEI](https://www.ncei.noaa.gov)). The dataset covers the period from
-2016-01-01 to 2025-08-25, with measurements in °F.
+2016-01-01 to 2025-08-25, with measurements in °F (see Figure 1).
 
 ## Functions
 
