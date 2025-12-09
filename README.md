@@ -53,7 +53,9 @@ Splits a univariate time series into training and testing sets based on
 a percentage cutoff.
 
 ``` r
-train_test_data <- train_test_split(x, dates, p = 0.05)
+train_test_data <- train_test_split(x, # Total time serie
+                                    dates, # Total dates
+                                    p = 0.05) # Proportion for testing
 train_test_data$x_train # Training dataset
 train_test_data$x_test # Testing dataset
 train_test_data$dates_train # Training dates
@@ -67,7 +69,8 @@ cross-validation squeme ([Schnaubelt M.,
 2019](https://www.econstor.eu/bitstream/10419/209136/1/1684440068.pdf)).
 
 ``` r
-cv_datasets <- cv_dataset_creation(train_test_data$x_train, folds = 5)
+cv_datasets <- cv_dataset_creation(train_test_data$x_train, # Training data for CV
+                                   folds = 5) # Number of folds
 result$fold_1 # List containing training and validation datasets for the first CV iteration
 ```
 
@@ -79,7 +82,9 @@ ridge estimator, and returns fitted values, coefficients, and error
 metrics.
 
 ``` r
-fit <- fit_ar_l2(x_train, lags = lags, beta = beta)
+fit <- fit_ar_l2(x_train, # Training data
+                 lags = lags, # Number of lags
+                 beta = beta) # Ridge. reg. parameter
 fit$coef # Regression coefficients (penalized by ridge reg.)
 ```
 
@@ -92,7 +97,10 @@ Returns the mean validation error for each combination and identifies
 the optimal hyperparameters.
 
 ``` r
-cv_results <- cv_ar_l2(x_train, folds = 9, lags = 7, beta = 0.1)
+cv_results <- cv_ar_l2(x_train, # Training dataset
+                       folds = 9, # Number of folds
+                       lags = 7, # Number of lags
+                       beta = 0.1) # Ridge. reg. parameter
 cv_results$mean_mae # Mean RMSE over all folds in the blocked CV.
 ```
 
@@ -104,13 +112,24 @@ observations in a sliding window.
 Returns rolling predictions, error metrics, and the model sequence.
 
 ``` r
-forecasting <- dynamic_regression(x_train, x_test, beta = 0.1, lags = 7, window)
+forecasting <- dynamic_regression(x_train, # Training dataset
+                                  x_test, # Testing dataset
+                                  beta = 0.1, # Ridge. reg. parameter
+                                  lags = 7, # Number of lags
+                                  window = 365) # Sliding window model training
+forecasting # Out-of-sample predictions/forecasting
 ```
 
 ### `rmse()`
 
 Computes the Root Mean Squared Error (RMSE) between the ground-truth
 time serie and the forecasting.
+
+``` r
+error <- rmse(x_test, # Ground-truth time-serie
+                    forecasting) # Forecasting
+error # RMSE between x_test and forecasting
+```
 
 ## Installation
 

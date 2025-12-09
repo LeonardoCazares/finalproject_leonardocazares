@@ -4,7 +4,7 @@
 \alias{dynamic_regression}
 \title{Dynamic ridge autoregressive forecasting}
 \usage{
-dynamic_regression(x_train, x_test, beta, p, window)
+dynamic_regression(x_train, x_test, beta, lags, window)
 }
 \arguments{
 \item{x_train}{numeric vector, training time series.}
@@ -13,10 +13,10 @@ dynamic_regression(x_train, x_test, beta, p, window)
 
 \item{beta}{non–negative scalar, ridge regularization parameter (lambda).}
 
-\item{p}{integer, number of lags in the AR(p) model.}
+\item{lags}{integer, number of lags in the AR(lags) model.}
 
 \item{window}{integer, size of the rolling training window at each step.
-Must satisfy \code{window > p} and \code{window <= length(x_train)}.}
+Must satisfy \code{window > lags} and \code{window <= length(x_train)}.}
 }
 \value{
 numeric vector of predictions of length \code{length(x_test)}.
@@ -25,7 +25,7 @@ numeric vector of predictions of length \code{length(x_test)}.
 This function performs a dynamic training scheme of a ridge-autoregressive model over
 a univariate time-series. At each step it:
 \itemize{
-\item fits an AR(p) model (where p = # of lags) with ridge penalty using only the last \code{window}
+\item fits an AR(lags) model (where lags = # of lags) with ridge penalty using only the last \code{window}
 observations from the training part of the current time series,
 \item predicts a one-step-ahead forecast,
 \item updates the training series by dropping its first value and
@@ -43,6 +43,6 @@ x <- arima.sim(model = list(ar = 0.7), n = 200)
 x_train <- x[1:160]
 x_test  <- x[161:200]
 preds <- dynamic_regression(x_train, x_test,
-                          beta = 1, p = 3, window = 50)
+                          beta = 1, lags = 3, window = 50)
 length(preds)  # should be length(x_test)
 }
